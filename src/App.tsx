@@ -1,25 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import Login from "./pages/Login";
+// import Signup from "./pages/Signup";
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+//////////
+
+// import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import Login from "./pages/Login";
+// import Signup from "./pages/Signup";
+// import Homepage from "./pages/Homepage";
+// import Form from "./pages/Form";
+// import Profile from "./pages/Profile"; // For Profile section
+
+// function App() {
+//   return (
+//     <Router>
+//       <Routes>
+//         <Route path="/" element={<Login />} />
+//         <Route path="/signup" element={<Signup />} />
+//         <Route path="/homepage" element={<Homepage />} /> {/* New homepage */}
+//         <Route path="/form" element={<Form />} /> {/* New form page */}
+//         <Route path="/profile" element={<Profile />} /> {/* New profile page */}
+//       </Routes>
+//     </Router>
+//   );
+// }
+
+// export default App;
+//////
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
+import Homepage from './pages/Homepage';
+import Form from "./pages/Form";
+import Profile from "./pages/Profile"; // For Profile section
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route path="/homepage" element={<Homepage />} /> {/* Ensure this path is used in redirection */}
+        <Route path="/form" element={<Form />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+    </Router>
   );
 }
 
