@@ -4,6 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 import ReCAPTCHA from "react-google-recaptcha";
 import "../styles/form.css";
+import Snackbar, { SnackbarCloseReason } from '@mui/material/Snackbar';
 
 const EmployeeRegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -67,23 +68,30 @@ const EmployeeRegistrationForm = () => {
     formPayload.append("employmentType", formData.employmentType);
     formPayload.append("address", formData.address);
     formPayload.append("department", formData.department);
-    if (formData.resume) formPayload.append("resume", formData.resume);
+    if (formData.resume) formPayload.append("file", formData.resume);
     if (captchaToken) formPayload.append("captchaToken", captchaToken);
 console.log(formPayload, 'formPayload');
 
     try {
-      const response = await axios.post("http://localhost:5000/api/auth/submit", {
-        body: {
-          formData,
-          captchaToken
-        },
+      const response = await axios.post("http://localhost:5000/api/auth/submit", formPayload, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
         // Removed invalid 'body' property
       });
+      alert('Employee registered successfully')
       console.log(response.data);
-      setSuccessMessage("Employee registered successfully!");
+      // if(response){
+        <Snackbar
+        open={true}
+        autoHideDuration={6000}
+        // onClose={handleClose}
+        message="Note archived"
+        // action={action}
+      />
+
+      // }
+      // setSuccessMessage("Employee registered successfully!");
       setFormData({
         employeeName: "",
         employeeEmail: "",
@@ -110,6 +118,7 @@ console.log(formPayload, 'formPayload');
   return (
     <form onSubmit={handleSubmit}>
       <label>Employee Name:</label>
+      {errors.employeeName && <span style={{color: 'red'}}>{errors.employeeName}</span>}
       <input
         type="text"
         name="employeeName"
@@ -117,9 +126,9 @@ console.log(formPayload, 'formPayload');
         onChange={handleChange}
         placeholder="enter your name"
       />
-      {errors.employeeName && <span>{errors.employeeName}</span>}
 
       <label>Email Address:</label>
+      {errors.employeeEmail && <span style={{color: 'red'}}>{errors.employeeEmail}</span>}
       <input
         type="email"
         name="employeeEmail"
@@ -127,7 +136,6 @@ console.log(formPayload, 'formPayload');
         onChange={handleChange}
         placeholder="email@example.com"
       />
-      {errors.employeeEmail && <span>{errors.employeeEmail}</span>}
 
       <label>Password:</label>
       <input
@@ -137,11 +145,11 @@ console.log(formPayload, 'formPayload');
         onChange={handleChange}
         placeholder="Create a password"
       />
-      {errors.employeePassword && <span>{errors.employeePassword}</span>}
+      {errors.employeePassword && <span style={{color: 'red'}}>{errors.employeePassword}</span>}
 
       <label>Birth Date:</label>
       <input type="date" name="birthDate" value={formData.birthDate} onChange={handleChange} />
-      {errors.birthDate && <span>{errors.birthDate}</span>}
+      {errors.birthDate && <span style={{color: 'red'}}>{errors.birthDate}</span>}
 
       <label>Employee ID:</label>
       <input
@@ -151,7 +159,7 @@ console.log(formPayload, 'formPayload');
         onChange={handleChange}
         placeholder="Employee ID"
       />
-      {errors.employeeID && <span>{errors.employeeID}</span>}
+      {errors.employeeID && <span style={{color: 'red'}}>{errors.employeeID}</span>}
 
       <label>Employment Type:</label>
       <input
