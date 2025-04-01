@@ -55,7 +55,7 @@ const EmployeeRegistrationForm = () => {
   // Handle form submission
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    // if (!validateForm()) return;
+    if (!validateForm()) return;
 
     // Prepare form data with FormData for file upload
     const formPayload = new FormData();
